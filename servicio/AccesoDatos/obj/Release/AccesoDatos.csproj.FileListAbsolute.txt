@@ -1,0 +1,9 @@
+C:\Users\vegai\source\repos\servicio\AccesoDatos\bin\Release\AccesoDatos.dll
+C:\Users\vegai\source\repos\servicio\AccesoDatos\bin\Release\AccesoDatos.pdb
+C:\Users\vegai\source\repos\servicio\AccesoDatos\bin\Release\Entidades.dll
+C:\Users\vegai\source\repos\servicio\AccesoDatos\bin\Release\Entidades.pdb
+C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.csprojAssemblyReference.cache
+C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.csproj.CoreCompileInputs.cache
+C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.csproj.CopyComplete
+C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.dll
+C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.pdb
