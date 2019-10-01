@@ -9,17 +9,29 @@ namespace servicio
 {
     public class Logica
     {
-        public List<Curso> busqueda(int estudiante) { 
-            Conexion conexion = new Conexion();
-            return conexion.ConsultarCursos(estudiante);
+        #region variables
+        private Conexion conexion;
+        #endregion
+
+        #region métodos
+        public Logica()
+        {
+            conexion = new Conexion();
         }
-        public Boolean validar(string ced, string clave) { 
-            Conexion conexion = new Conexion();
-            return conexion.validar(ced, clave);
+        public Boolean validar(string cedula) { 
+            return conexion.validarCedula(cedula);
         }
-        public List<Curso> llenar(string ced) { 
-            Conexion conexion = new Conexion();
-            return conexion.llenarTabla(ced);
+        public Boolean login(string cedula, string clave) { 
+            return conexion.login(cedula, clave);
         }
+        public List<Estudiante_Curso> consultarCursos(string cedula) { 
+            return conexion.consultarCursos(cedula);
+        }
+
+        public Boolean registrar(Login usuario)
+        {
+            return conexion.registrar(usuario);
+        }
+        #endregion
     }
 }

@@ -17,53 +17,37 @@ namespace servicio
     [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
-
+        #region métodos
         [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-        [WebMethod]
-        public int Add(List<int> listInt)
-        {
-            int result = 0;
-            for (int i = 0; i < listInt.Count; i++)
-            {
-                result = result + listInt[i];
-            }
-            return result;
-        }
-        [WebMethod]
-        public int Suma(int a, int b)
-        {
-            return a+b;
-        }
-
-        [WebMethod]
-        public int Mult(int a)
-        {
-            return a*2;
-        }
-
-        [WebMethod]
-        public List<Curso> buscar(int estudiante)
-        {
-            Logica lol = new Logica();
-            return lol.busqueda(estudiante);
-        }
-
-        [WebMethod]
-        public List<Curso> llenar(string ced)
+        public List<Estudiante_Curso> llenarTabla(string estudiante)
         {
             Logica logica = new Logica();
-            return logica.llenar(ced);
+            return logica.consultarCursos(estudiante);
         }
 
         [WebMethod]
-        public Boolean validar(string ced, string clave)
+        public Boolean login(string cedula, string clave)
         {
             Logica logica = new Logica();
-            return logica.validar(ced, clave);
+            return logica.login(cedula, clave);
         }
+
+        [WebMethod]
+        public Boolean validar(string cedula)
+        {
+            Logica logica = new Logica();
+            return logica.validar(cedula);
+        }
+        [WebMethod]
+        public Boolean registrar(string correo, string clave, string cedula)
+        {
+            Logica logica = new Logica();
+            Login usuario = new Login();
+            usuario.clave = clave;
+            usuario.correo = correo;
+            usuario.cedula = cedula;
+            return logica.registrar(usuario);
+        }
+        #endregion
     }
 }
