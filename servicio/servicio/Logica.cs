@@ -21,10 +21,10 @@ namespace servicio
         public Boolean validar(string cedula) { 
             return conexion.validarCedula(cedula);
         }
-        public Boolean login(string cedula, string clave) { 
+        public string login(string cedula, string clave) { 
             return conexion.login(cedula, clave);
         }
-        public List<Estudiante_Curso> consultarCursos(string cedula) { 
+        public List<Grupo_Participante> consultarCursos(string cedula) { 
             return conexion.consultarCursos(cedula);
         }
 

@@ -46,15 +46,15 @@ namespace AccesoDatos
             }
         }
 
-        public List<Estudiante_Curso> consultarCursos(string cedula)
+        public List<Grupo_Participante> consultarCursos(string cedula)
         {
             try
             {
                 if (ConectarBD())
                 {
-                    List<Estudiante_Curso> cursos = new List<Estudiante_Curso>();
+                    List<Grupo_Participante> cursos = new List<Grupo_Participante>();
                     SqlCommand comando = new //Hay que ver bien que quiere presentar, el join está listo
-                    SqlCommand("Select cc.Nom_Curso, cg.Con_Curso, gp.Num_Calificacion_Obtenida, gp.Bool_Retiro_Certificado" +
+                    SqlCommand("Select cg.Dsc_Cogdigo, cc.Nom_Curso, gp.Num_Calificacion_Obtenida, gp.Bool_Retiro_Certificado, gp.Fec_Fecha_Retiro" +
                     " from Com_Persona p, Par_Grupo_Participante gp, Cur_Grupo cg, Cur_Curso cc" +
                     " where p.Dsc_Identificacion=@cedula and p.Con_Persona=gp.Con_Persona and gp.Con_Grupo=cg.Con_Grupo" +
                     "and cg.Con_Grupo=cc.Con_Curso");
@@ -65,11 +65,17 @@ namespace AccesoDatos
                     {
                         while (lector.Read())
                         {
-                            Estudiante_Curso nuevo = new Estudiante_Curso();
-                            nuevo.idCurso = lector.GetInt32(0);
+                            Grupo_Participante nuevo = new Grupo_Participante();
+                            nuevo.codigoGrupo = lector.GetString(0);
                             nuevo.nombreCurso = lector.GetString(1);
                             nuevo.calificacion = lector.GetInt32(2);
-                            nuevo.retirado = lector.GetInt32(3);
+                            if(lector.GetBoolean(3)){
+                                nuevo.retirado = "Retirado";
+                            }
+                            else
+                            {
+                                nuevo.retirado ="No retirado";
+                            }
                             nuevo.fechaRetirado = lector.GetDateTime(4);
                             cursos.Add(nuevo);
                         }
@@ -86,33 +92,33 @@ namespace AccesoDatos
                 return null;
             }
         }
-        public Boolean login(string cedula, string clave)
+        public string login(string cedula, string clave)
         {
             try
             {
                 if (ConectarBD())
                 {
-                    SqlCommand comando = new SqlCommand("Select idEstudiante from loguear where cedula = @cedula and clave = @clave");
+                    SqlCommand comando = new SqlCommand("Select cp.Nom_Nombre from Login l, Com_Persona cp where l.Dsc_Identificacion = @cedula and l.clave = @clave and l.Dsc_Identificacion = cp.Dsc_Identificacion");
                     comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = cedula;
                     comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = clave;
                     comando.Connection = this.conexion;
                     using(SqlDataReader lector = comando.ExecuteReader()) { 
                         if (lector.HasRows){
-                            return true;
+                            return lector.GetString(0);
                         }
                         else{
-                            return false;
+                            return null;
                         }
                     }
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
             catch
             {
-                return false;
+                return null;
             }
         }
         public Boolean validarCedula(string cedula)
@@ -149,9 +155,9 @@ namespace AccesoDatos
             {
                 if (ConectarBD())
                 {
-                    SqlCommand comando = new SqlCommand("insert into loguear(@cedula,@clave,@correo)");
-                    comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = usuario.cedula;
+                    SqlCommand comando = new SqlCommand("insert into Login(@clave,@cedula,@correo)");
                     comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = usuario.clave;
+                    comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = usuario.cedula;
                     comando.Parameters.Add("@correo", SqlDbType.VarChar).Value = usuario.correo;
                     comando.Connection = this.conexion;
                     if (comando.ExecuteNonQuery()>0)

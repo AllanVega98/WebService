@@ -14,17 +14,6 @@ namespace servicio
         {
 
         }
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            WebService1 webService = new WebService1();
-            //Label1.Text = "Output of WebService: " + webService.buscar(1);
-            if (webService.validar("777", "333")==true)
-            {
-                Label1.Text = "Linda";
-            }
-            else {
-                Label1.Text = "Nope";
-            }
-        }
+       
     }
 }
