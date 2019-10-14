@@ -6,20 +6,20 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\vegai\Desktop\consultawcf</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\avega-tmp\Documents\Web</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AccesoDatos.dll">
-      <publishTime>09/18/2019 13:19:39</publishTime>
+      <publishTime>10/14/2019 12:30:13</publishTime>
     </File>
     <File Include="bin/AccesoDatos.pdb">
-      <publishTime>09/18/2019 13:19:39</publishTime>
+      <publishTime>10/14/2019 12:30:13</publishTime>
     </File>
     <File Include="bin/Entidades.dll">
-      <publishTime>09/18/2019 10:11:36</publishTime>
+      <publishTime>10/14/2019 08:41:11</publishTime>
     </File>
     <File Include="bin/Entidades.pdb">
-      <publishTime>09/18/2019 10:11:36</publishTime>
+      <publishTime>10/14/2019 08:41:11</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/16/2017 14:14:32</publishTime>
@@ -169,25 +169,25 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>12/13/2017 22:09:38</publishTime>
     </File>
     <File Include="bin/servicio.dll">
-      <publishTime>09/18/2019 13:19:45</publishTime>
+      <publishTime>10/14/2019 12:30:17</publishTime>
     </File>
     <File Include="bin/servicio.pdb">
-      <publishTime>09/18/2019 13:19:45</publishTime>
+      <publishTime>10/14/2019 12:30:17</publishTime>
     </File>
     <File Include="Connected Services/ServiceReference1/servicio.ServiceReference1.AddResponse.datasource">
-      <publishTime>08/27/2019 08:44:55</publishTime>
+      <publishTime>08/27/2019 08:44:56</publishTime>
     </File>
     <File Include="Connected Services/ServiceReference1/servicio.ServiceReference1.HelloWorldResponse.datasource">
-      <publishTime>08/27/2019 08:44:55</publishTime>
+      <publishTime>08/27/2019 08:44:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/27/2019 10:01:55</publishTime>
+      <publishTime>09/10/2019 07:52:35</publishTime>
     </File>
     <File Include="WebForm1.aspx">
-      <publishTime>09/04/2019 09:55:15</publishTime>
+      <publishTime>04/09/2019 09:55:15</publishTime>
     </File>
     <File Include="WebService1.asmx">
-      <publishTime>08/27/2019 08:34:07</publishTime>
+      <publishTime>08/27/2019 08:34:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

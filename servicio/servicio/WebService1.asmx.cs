@@ -19,14 +19,14 @@ namespace servicio
     {
         #region métodos
         [WebMethod]
-        public List<Grupo_Participante> llenarTabla(string estudiante)
+        public List<Grupo_Participante> llenarTabla(string cedula)
         {
             Logica logica = new Logica();
-            return logica.consultarCursos(estudiante);
+            return logica.consultarCursos(cedula);
         }
 
         [WebMethod]
-        public string login(string cedula, string clave)
+        public Boolean login(string cedula, string clave)
         {
             Logica logica = new Logica();
             return logica.login(cedula, clave);
@@ -37,6 +37,12 @@ namespace servicio
         {
             Logica logica = new Logica();
             return logica.validar(cedula);
+        }
+        [WebMethod]
+        public string nombre(string cedula)
+        {
+            Logica logica = new Logica();
+            return logica.nombre(cedula);
         }
         [WebMethod]
         public Boolean registrar(string correo, string clave, string cedula)

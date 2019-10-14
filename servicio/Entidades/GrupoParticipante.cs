@@ -10,8 +10,8 @@ namespace Entidades
     {
         public string nombreCurso{set;get;}
         public string codigoGrupo{set;get;}
-        public int calificacion { set; get; }
+        public decimal calificacion { set; get; }
         public string retirado { set; get; }
-        public DateTime fechaRetirado { set; get; }
+        public string fechaRetirado { set; get; }
     }
 }

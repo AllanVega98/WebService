@@ -21,7 +21,11 @@ namespace servicio
         public Boolean validar(string cedula) { 
             return conexion.validarCedula(cedula);
         }
-        public string login(string cedula, string clave) { 
+        public string nombre(string cedula)
+        {
+            return conexion.nombre(cedula);
+        }
+        public Boolean login(string cedula, string clave) { 
             return conexion.login(cedula, clave);
         }
         public List<Grupo_Participante> consultarCursos(string cedula) { 
@@ -31,6 +35,11 @@ namespace servicio
         public Boolean registrar(Login usuario)
         {
             return conexion.registrar(usuario);
+        }
+
+        public Boolean con()
+        {
+            return conexion.ConectarBD();
         }
         #endregion
     }

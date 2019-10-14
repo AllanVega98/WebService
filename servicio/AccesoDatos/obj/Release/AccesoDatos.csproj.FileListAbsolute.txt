@@ -7,3 +7,12 @@ C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.csproj.
 C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.csproj.CopyComplete
 C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.dll
 C:\Users\vegai\source\repos\servicio\AccesoDatos\obj\Release\AccesoDatos.pdb
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\bin\Release\AccesoDatos.dll
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\bin\Release\AccesoDatos.pdb
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\bin\Release\Entidades.dll
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\bin\Release\Entidades.pdb
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\obj\Release\AccesoDatos.csprojAssemblyReference.cache
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\obj\Release\AccesoDatos.csproj.CoreCompileInputs.cache
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\obj\Release\AccesoDatos.csproj.CopyComplete
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\obj\Release\AccesoDatos.dll
+C:\Users\avega-tmp\Documents\servicio\AccesoDatos\obj\Release\AccesoDatos.pdb

@@ -4,3 +4,9 @@ C:\Users\vegai\source\repos\servicio\Entidades\obj\Release\Entidades.csprojAssem
 C:\Users\vegai\source\repos\servicio\Entidades\obj\Release\Entidades.csproj.CoreCompileInputs.cache
 C:\Users\vegai\source\repos\servicio\Entidades\obj\Release\Entidades.dll
 C:\Users\vegai\source\repos\servicio\Entidades\obj\Release\Entidades.pdb
+C:\Users\avega-tmp\Documents\servicio\Entidades\bin\Release\Entidades.dll
+C:\Users\avega-tmp\Documents\servicio\Entidades\bin\Release\Entidades.pdb
+C:\Users\avega-tmp\Documents\servicio\Entidades\obj\Release\Entidades.csprojAssemblyReference.cache
+C:\Users\avega-tmp\Documents\servicio\Entidades\obj\Release\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\avega-tmp\Documents\servicio\Entidades\obj\Release\Entidades.dll
+C:\Users\avega-tmp\Documents\servicio\Entidades\obj\Release\Entidades.pdb
