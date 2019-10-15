@@ -12,9 +12,9 @@ class metodos{
 
             if($verificar->loginResult){
                 $nombre = $client->nombre(['cedula'=>$varCed]);//llenar la tabla, verificar en la pàgina para llenar la tabla
-                echo $nombre->nombreResult;
+                return $nombre->nombreResult;
             }else{//Hay que poner la redireccion al login con el error
-                $this->error="El usuario o la contraseña no son correctos";
+                return null;
             }
 
         }catch(Exception $e){
@@ -43,7 +43,7 @@ class metodos{
             $client = new SoapClient($this->url);  
             $verificar = $client->llenarTabla(['cedula'=>$varCed]);
             return $verificar->llenarTablaResult;
-            
+
         }catch(Exception $e){
             $e->getMessage();
         }

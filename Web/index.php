@@ -1,3 +1,31 @@
+<?php
+ session_start();
+
+if (isset($_SESSION['usuario'])) {
+  header('Location: /Cenarec/consulta.php?varCed='.$_SESSION['usuario']);
+}
+
+require_once('metodos.php');
+$error = "";
+
+if(!empty($_POST['estudiante']) && !empty($_POST['clave'])){
+  
+  $controlador = new metodos();
+  $varCed = $_POST['estudiante'];
+  $varClave = $_POST['clave'];
+  $_SESSION['last_time'] = time();
+  if( $controlador->login($varCed,$varClave)!=null){
+    echo $controlador->login($varCed,$varClave);
+    $_SESSION['usuario'] = $controlador->login($varCed,$varClave);
+    header('Location: /Cenarec/consulta.php?varCed='.$varCed);
+  }
+  else  
+  {
+    $error = "La cédula o la contraseña no son válidas";
+  } 
+}
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,16 +50,19 @@
       </li>
 
     </ul>
-    <form action="consulta.php" method="post" class="form-inline my-2 my-lg-0">
+    <form action="index.php" method="post" class="form-inline my-2 my-lg-0">
       <label for="">Ingrese cedula: </label>
-      <input required class="form-control mr-sm-2"  placeholder="Cédula" aria-label="Search" id="estudiante">
+      <input required class="form-control mr-sm-2"  placeholder="Cédula" aria-label="Search" name="estudiante">
       
       <label for="">Ingrese contraseña:  </label>
-      <input required class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="Search" id="clave">
+      <input required class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="Search" name="clave">
       
       <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Ingresar</button>
       <a for=""href="" data-toggle="modal" data-target="#exampleModal">¿No está registrado?</a>
     </form>
+    <div id="alerta" class="alert alert-warning" role="alert" hide>
+        <?php echo "".$error; ?>
+    </div>
   </div>
 </nav>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,4 +1,19 @@
 <?php
+session_start();
+$time = $_SERVER['REQUEST_TIME'];
+
+if (!isset($_SESSION['usuario'])) {
+    header('Location: /Cenarec/index.php');
+}
+else if((time() - $_SESSION['last_time'])> 1800){
+    session_destroy();
+    header('Location: /Cenarec/index.php');
+} 
+else{
+    $_SESSION['last_time']=time();
+}
+require_once('metodos.php');
+$controlador = new metodos();
 ?>
 <html lang="en">
 <head>
@@ -12,8 +27,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">CENAREC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,27 +36,23 @@
         Bienvenido
         </div>
         </nav>
+    <div class="container">
         <div class="container-fluid">
 	    <table class="table table-dark">
 		    <thead>
 			    <tr>
 				    <th scope="col">Nombre</th>
-				    <th scope="col">Calificación</th>
 				    <th scope="col">Curso</th>
+                    <th scope="col">Calificación</th>
+                    <th scope="col">Retirado</th>
+                    <th scope="col">Fecha de emisión</th>
 			    </tr>
 		    </thead>
 		<tbody>
         <?php			
 try{
-//$varCed = $_POST['estudiante'];
-//$varClave = $_POST['clave'];
-$url="http://localhost:8080/WebService1.asmx?WSDL";
-$client = new SoapClient($url);
- //$verificar = $client->validar(['ced'=>"604470638",'clave'=>"123"]);
-$verificar = $client->login(['cedula'=>'604470638','clave'=>'123']);
-if($verificar->loginResult!=null){
-    $grupo_participante = $client->llenarTabla(['cedula'=>'604470638']);
-    foreach ($grupo_participante->llenarTablaResult->Grupo_Participante as $aux)
+    $_SESSION['usuario']=$_GET['varCed'];
+    foreach ($controlador->llenarTabla($_GET['varCed'])->Grupo_Participante as $aux)
 	{
 ?>
             <thead>
@@ -56,7 +66,7 @@ if($verificar->loginResult!=null){
 			</thead>
 <?php 
     }
-}
+
 }catch(Exception $e){
 	$e->getMessage();
 }
