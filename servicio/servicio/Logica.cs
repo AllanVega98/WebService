@@ -18,7 +18,7 @@ namespace servicio
         {
             conexion = new Conexion();
         }
-        public Boolean validar(string cedula) { 
+        public int validar(string cedula) { 
             return conexion.validarCedula(cedula);
         }
         public string nombre(string cedula)

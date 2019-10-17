@@ -33,7 +33,7 @@ namespace servicio
         }
 
         [WebMethod]
-        public Boolean validar(string cedula)
+        public int validar(string cedula)
         {
             Logica logica = new Logica();
             return logica.validar(cedula);

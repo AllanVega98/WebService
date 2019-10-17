@@ -38,7 +38,6 @@ namespace AccesoDatos
             try
             {
                 conexion = new SqlConnection("user id='" + usuario + "'; password='" + clave + "'; Data Source='" + ObtenerNombreServidor() + "\\SQLEXPRESS01'; Initial Catalog='" + baseDatos + "';");
-               //conexion = new SqlConnection("Data Source='" + ObtenerNombreServidor() + @"\SQLEXPRESS01'; initial catalog='" + baseDatos+ "'; integrated security=true;");
                 conexion.Open();
                 return true;
             }
@@ -119,32 +118,55 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public Boolean validarCedula(string cedula)
-        {
+        public int validarCedula(string cedula)//1: Puede registrarse 2: Ya tiene un usuario 3: No se encuentra en el sistema y por eso no puede registrarse
+        {//4: un error
             try
             {
                 if (ConectarBD())
-                {
+                  {
+                    bool registrado = false;
+
                     SqlCommand comando = new SqlCommand("Select Nom_Nombre from Com_Persona where Dsc_Identificacion = @cedula");
                     comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = cedula;
                     comando.Connection = this.conexion;
-                    using(SqlDataReader lector = comando.ExecuteReader()) { 
-                        if (lector.HasRows){
-                            return true;
+                    using (SqlDataReader lector = comando.ExecuteReader()) { 
+                        if (lector.HasRows)
+                        {
+                            registrado = true;
                         }
-                        else{
-                            return false;
+                        else
+                        {//no existe
+                            return 3;
                         }
+                    }
+                    if (registrado)
+                    {
+                        SqlCommand comando2 = new SqlCommand("Select Dsc_Identificacion from login where Dsc_Identificacion = @cedula");
+                        comando2.Parameters.Add("@cedula", SqlDbType.VarChar).Value = cedula;
+                        comando2.Connection = this.conexion;
+                        SqlDataReader lector2 = comando2.ExecuteReader();
+                        if (lector2.HasRows)
+                        {//Ya está registrado
+                            return 2;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    }
+                    else
+                    {//no está registrado
+                        return 3;
                     }
                 }
                 else
                 {
-                    return false;
+                    return 4;
                 }
             }
             catch
             {
-                return false;
+                return 4;
             }
         }
         public string nombre(string cedula)
