@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Grupo_Participante
+    public class GrupoParticipante
     {
         public string nombreCurso{set;get;}
         public string codigoGrupo{set;get;}

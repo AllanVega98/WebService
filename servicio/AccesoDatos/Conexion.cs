@@ -27,17 +27,25 @@ namespace AccesoDatos
             this.usuario = "web";
             this.clave = "web123";
         }
-        #region métodos 
-        public String ObtenerNombreServidor()
+        #region métodos
+        /// <summary>
+        /// Solicita el nombre del servidor donde se encuentra alojado
+        /// </summary>
+        /// <returns>Retorna el nombre del servidor</returns>
+        public String obtenerNombreServidor()
         {
             return Dns.GetHostName();
         }
 
-        public Boolean ConectarBD()
+        /// <summary>
+        /// Realiza la conexión con la base de datos
+        /// </summary>
+        /// <returns>Retorna un boolean para verificar si la conexion es exitosa</returns>
+        public Boolean conectarBD()
         {                           
             try
             {
-                conexion = new SqlConnection("user id='" + usuario + "'; password='" + clave + "'; Data Source='" + ObtenerNombreServidor() + "\\SQLEXPRESS01'; Initial Catalog='" + baseDatos + "';");
+                conexion = new SqlConnection("user id='" + usuario + "'; password='" + clave + "'; Data Source='" + obtenerNombreServidor() + "\\SQLEXPRESS01'; Initial Catalog='" + baseDatos + "';");
                 conexion.Open();
                 return true;
             }
@@ -47,13 +55,18 @@ namespace AccesoDatos
             }
         }
 
-        public List<Grupo_Participante> consultarCursos(string cedula)
+        /// <summary>
+        /// Consulta los cursos del estudiante por medio de la cédula
+        /// </summary>
+        /// <param name="cedula"></param>
+        /// <returns>Retorna lista de los cursos del estudiante</returns>
+        public List<GrupoParticipante> consultarCursos(string cedula)
         {
             try
             {
-                if (ConectarBD())
+                if (conectarBD())
                 {
-                    List<Grupo_Participante> cursos = new List<Grupo_Participante>();
+                    List<GrupoParticipante> cursos = new List<GrupoParticipante>();
                     SqlCommand comando = new 
                     SqlCommand("Select cg.Dsc_Codigo, cc.Nom_Curso, gp.Num_Calificacion_Obtenida, gp.Bool_Retiro_Certificado, gp.Fec_Fecha_Retiro from Com_Persona p, Par_Grupo_Participante gp, Cur_Grupo cg, Cur_Curso cc where p.Dsc_Identificacion=@cedula and p.Con_Persona=gp.Con_Persona and gp.Con_Grupo=cg.Con_Grupo and cg.Con_Grupo=cc.Con_Curso");
                     comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = cedula;
@@ -62,7 +75,7 @@ namespace AccesoDatos
                     {
                         while (lector.Read())
                         {
-                            Grupo_Participante nuevo = new Grupo_Participante();
+                            GrupoParticipante nuevo = new GrupoParticipante();
                             nuevo.codigoGrupo = lector.GetString(0);
                             nuevo.nombreCurso = lector.GetString(1);
                             nuevo.calificacion = lector.GetDecimal(2);
@@ -89,15 +102,25 @@ namespace AccesoDatos
                 return null;
             }
         }
+        /// <summary>
+        /// Verifica si el usuario está registrado
+        /// </summary>
+        /// <param name="cedula"></param>
+        /// <param name="clave"></param>
+        /// <returns>Retorna un boolean para verificar si el usuario está registrado</returns>
         public Boolean login(string cedula, string clave)
         {
             try
             {
-                if (ConectarBD())
+                if (conectarBD())
                 {
                     SqlCommand comando = new SqlCommand("Select cp.Nom_Nombre from Login l, Com_Persona cp where l.Dsc_Identificacion = @cedula and l.clave = @clave and l.Dsc_Identificacion = cp.Dsc_Identificacion");
                     comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = cedula;
-                    comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = clave;
+                    
+                    //encriptación de la clave
+                    byte[] claveEncriptada = System.Text.Encoding.Unicode.GetBytes(clave);
+                    comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = Convert.ToBase64String(claveEncriptada);
+
                     comando.Connection = this.conexion;
                     using(SqlDataReader lector = comando.ExecuteReader()) { 
                         if (lector.HasRows){
@@ -118,11 +141,16 @@ namespace AccesoDatos
                 return false;
             }
         }
+        /// <summary>
+        /// Valida que la cédula esté registrada
+        /// </summary>
+        /// <param name="cedula"></param>
+        /// <returns>Retorna un int: 1= Puede registrarse. 2= Ya está registrado. 3= No se encuentra en el sistema. 4= Error.</returns>
         public int validarCedula(string cedula)//1: Puede registrarse 2: Ya tiene un usuario 3: No se encuentra en el sistema y por eso no puede registrarse
         {//4: un error
             try
             {
-                if (ConectarBD())
+                if (conectarBD())
                   {
                     bool registrado = false;
 
@@ -169,11 +197,16 @@ namespace AccesoDatos
                 return 4;
             }
         }
+        /// <summary>
+        /// Busca el nombre del estudiante por medio de la cédula
+        /// </summary>
+        /// <param name="cedula"></param>
+        /// <returns>Retorna un string con el nombre del estudiante</returns>
         public string nombre(string cedula)
         {
             try
             {
-                if (ConectarBD())
+                if (conectarBD())
                 {
                     SqlCommand comando = new SqlCommand("Select Nom_Nombre from Com_Persona where Dsc_Identificacion = @cedula");
                     comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = cedula;
@@ -197,14 +230,20 @@ namespace AccesoDatos
                 return null;
             }
         }
+        /// <summary>
+        /// Registra el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns>Retorna un boolean para verificar si se registró con éxito</returns>
         public Boolean registrar(Login usuario)
         {
             try
             {
-                if (ConectarBD())
+                if (conectarBD())
                 {
                     SqlCommand comando = new SqlCommand("insert into Login(clave,Dsc_Identificacion,correo)values(@clave,@cedula,@correo)");
-                    comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = usuario.clave;
+                    byte[] claveEncriptada = System.Text.Encoding.Unicode.GetBytes(usuario.clave);
+                    comando.Parameters.Add("@clave", SqlDbType.VarChar).Value = Convert.ToBase64String(claveEncriptada);
                     comando.Parameters.Add("@cedula", SqlDbType.VarChar).Value = usuario.cedula;
                     comando.Parameters.Add("@correo", SqlDbType.VarChar).Value = usuario.correo;
                     comando.Connection = this.conexion;

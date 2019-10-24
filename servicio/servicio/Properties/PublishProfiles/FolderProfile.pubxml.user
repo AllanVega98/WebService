@@ -10,10 +10,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AccesoDatos.dll">
-      <publishTime>10/17/2019 10:22:58</publishTime>
+      <publishTime>10/21/2019 12:11:51</publishTime>
     </File>
     <File Include="bin/AccesoDatos.pdb">
-      <publishTime>10/17/2019 10:22:58</publishTime>
+      <publishTime>10/21/2019 12:11:51</publishTime>
     </File>
     <File Include="bin/Entidades.dll">
       <publishTime>10/14/2019 08:41:11</publishTime>
@@ -169,10 +169,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>12/13/2017 22:09:38</publishTime>
     </File>
     <File Include="bin/servicio.dll">
-      <publishTime>10/17/2019 10:51:21</publishTime>
+      <publishTime>10/21/2019 12:11:54</publishTime>
     </File>
     <File Include="bin/servicio.pdb">
-      <publishTime>10/17/2019 10:51:21</publishTime>
+      <publishTime>10/21/2019 12:11:54</publishTime>
     </File>
     <File Include="Connected Services/ServiceReference1/servicio.ServiceReference1.AddResponse.datasource">
       <publishTime>08/27/2019 08:44:56</publishTime>
@@ -181,7 +181,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/27/2019 08:44:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/10/2019 07:52:35</publishTime>
+      <publishTime>10/09/2019 07:52:35</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>04/09/2019 09:55:15</publishTime>

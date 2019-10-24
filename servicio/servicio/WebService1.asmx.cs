@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,40 +20,40 @@ namespace servicio
     {
         #region métodos
         [WebMethod]
-        public List<Grupo_Participante> llenarTabla(string cedula)
+        public List<GrupoParticipante> llenarTabla(string cedula)
         {
-            Logica logica = new Logica();
-            return logica.consultarCursos(cedula);
+            Conexion conexion = new Conexion();
+            return conexion.consultarCursos(cedula);
         }
 
         [WebMethod]
         public Boolean login(string cedula, string clave)
         {
-            Logica logica = new Logica();
-            return logica.login(cedula, clave);
+            Conexion conexion = new Conexion();
+            return conexion.login(cedula, clave);
         }
 
         [WebMethod]
         public int validar(string cedula)
         {
-            Logica logica = new Logica();
-            return logica.validar(cedula);
+            Conexion conexion = new Conexion();
+            return conexion.validarCedula(cedula);
         }
         [WebMethod]
         public string nombre(string cedula)
         {
-            Logica logica = new Logica();
-            return logica.nombre(cedula);
+            Conexion conexion = new Conexion();
+            return conexion.nombre(cedula);
         }
         [WebMethod]
         public Boolean registrar(string correo, string clave, string cedula)
         {
-            Logica logica = new Logica();
+            Conexion conexion = new Conexion();
             Login usuario = new Login();
             usuario.clave = clave;
             usuario.correo = correo;
             usuario.cedula = cedula;
-            return logica.registrar(usuario);
+            return conexion.registrar(usuario);
         }
         #endregion
     }
