@@ -20,7 +20,6 @@ namespace AccesoDatos
         private SqlConnection conexion;
         #endregion
 
-
         public Conexion()
         {
             this.baseDatos = "sicap";
@@ -86,7 +85,14 @@ namespace AccesoDatos
                             {
                                 nuevo.retirado ="No retirado";
                             }
-                            nuevo.fechaRetirado = lector.GetDateTime(4).ToString("dd-MM-yyyy");
+                            if (!lector.IsDBNull(4))//Verificar que no sea null 
+                            {
+                                nuevo.fechaRetirado = lector.GetDateTime(4).ToString("dd-MM-yyyy");
+                            }
+                            else
+                            {
+                                nuevo.fechaRetirado = "No emitido";
+                            }
                             cursos.Add(nuevo);
                         }
                         return cursos;
